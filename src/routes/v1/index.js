@@ -11,6 +11,6 @@ const router = express.Router();
 router.post("/city", create);
 router.delete("/city/:id", destroy);
 router.get("/city/:id", get);
-router.patch("/city", update);
+router.patch("/city/:id", update);
 
 module.exports = router;

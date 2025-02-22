@@ -25,14 +25,23 @@ const create = async (req, res) => {
 const destroy = async (req, res) => {
   try {
     const response = await cityService.destroyCity(req.params.id);
-    return res.status(200).josn({
-      data: response,
-      success: true,
-      message: "Successfully deleted the city",
-      error: {},
-    });
+    if (response.success) {
+      return res.status(200).json({
+        data: {},
+        success: true,
+        message: response.message,
+        error: {},
+      });
+    } else {
+      return res.status(404).json({
+        data: {},
+        success: false,
+        message: response.message,
+        error: {},
+      });
+    }
   } catch (error) {
-    console.log("something went wrong in the controller layer");
+    console.log("something went wrong in the controller layer", error);
     return res.status(500).json({
       data: {},
       success: false,

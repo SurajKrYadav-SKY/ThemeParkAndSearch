@@ -27,11 +27,15 @@ class CityRepository {
 
   async destroyCity(cityId) {
     try {
-      await City.destroy({
+      const deletedCount = await City.destroy({
         where: {
           id: cityId,
         },
       });
+
+      if (deletedCount === 0) {
+        return false;
+      }
       return true;
     } catch (error) {
       console.log("something went wrong in the repo layer");
