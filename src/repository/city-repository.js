@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { City } = require("../models/index");
 
 class CityRepository {
@@ -51,6 +52,30 @@ class CityRepository {
         },
       });
       return city;
+    } catch (error) {
+      console.log("something went wrong in the repo layer");
+      throw { error };
+    }
+  }
+
+  async getAllCities(filter) {
+    try {
+      const { cityName, page = 1, limit = 4 } = filter;
+
+      const queryOptions = {
+        limit: limit,
+        offset: (page - 1) * limit, // Skip records based on current page
+      };
+
+      if (cityName) {
+        queryOptions.where = {
+          cityName: {
+            [Op.startsWith]: cityName,
+          },
+        };
+      }
+      const cities = await City.findAll(queryOptions);
+      return cities;
     } catch (error) {
       console.log("something went wrong in the repo layer");
       throw { error };

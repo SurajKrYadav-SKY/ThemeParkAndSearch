@@ -91,9 +91,38 @@ const get = async (req, res) => {
   }
 };
 
+const getAllCities = async (req, res) => {
+  try {
+    const { cityName, page = 1, limit = 5 } = req.query;
+
+    const filter = {
+      cityName,
+      page: parseInt(page), // Make sure page is an integer
+      limit: parseInt(limit), // Make sure limit is an integer
+    };
+
+    const cities = await cityService.getAllCities(filter);
+    return res.status(200).json({
+      data: cities,
+      success: true,
+      message: "fetched all the cities successfully.",
+      error: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).status({
+      data: {},
+      success: false,
+      message: "Not able to fetch the city.",
+      error: error,
+    });
+  }
+};
+
 module.exports = {
   create,
   destroy,
   update,
   get,
+  getAllCities,
 };
