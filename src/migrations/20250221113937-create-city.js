@@ -12,6 +12,7 @@ module.exports = {
       cityName: {
         allowNull: false,
         type: Sequelize.STRING,
+        unique: true,
       },
       cityState: {
         allowNull: false,

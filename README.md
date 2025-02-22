@@ -12,14 +12,15 @@
 - this is the folder structure that is being followed
 
   - src/
-    index.js // server
-    models/
-    controllers/
-    middlewares/
-    services/ --> Services will be directly communicating with the repository. It will contain the business logic
-    utils/
-    config/
-    repository/ --> In the repository, we will be writing the code that will interact with the models in the database
+
+    - index.js // server
+    - models/
+    - controllers/
+    - middlewares/
+    - services/ --> Services will be directly communicating with the repository. It will contain the business logic
+    - utils/
+    - config/
+    - repository/ --> In the repository, we will be writing the code that will interact with the models in the database
 
   - tests // this will be unit testing [later]
   - static/
