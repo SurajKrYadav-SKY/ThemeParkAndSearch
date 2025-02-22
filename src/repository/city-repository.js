@@ -1,9 +1,13 @@
 const { City } = require("../models/index");
 
 class CityRepository {
-  async createCity({ name }) {
+  async createCity(data) {
     try {
-      const city = await City.create({ name });
+      const city = await City.create({
+        cityName: data.cityName,
+        cityState: data.cityState,
+        cityCountry: data.cityCountry,
+      });
       return city;
     } catch (error) {
       console.log("something went wrong in the repo layer");
