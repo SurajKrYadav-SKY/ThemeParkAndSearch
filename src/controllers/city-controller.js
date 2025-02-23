@@ -130,10 +130,32 @@ const getAllCities = async (req, res) => {
   }
 };
 
+const getParksByCity = async (req, res) => {
+  try {
+    console.log(req.params.id);
+    const response = await cityService.getAllParks(req.params.id);
+    return res.status(200).json({
+      data: response,
+      success: true,
+      message: "Successfully fetched all the parks",
+      error: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).status({
+      data: {},
+      success: false,
+      message: "Not able to fetch the parks.",
+      error: error,
+    });
+  }
+};
+
 module.exports = {
   create,
   destroy,
   update,
   get,
   getAllCities,
+  getParksByCity,
 };
