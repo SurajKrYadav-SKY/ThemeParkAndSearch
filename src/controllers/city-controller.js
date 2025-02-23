@@ -4,7 +4,18 @@ const cityService = new CityService();
 
 const create = async (req, res) => {
   try {
-    const response = await cityService.createCity(req.body);
+    const requestData = req.body;
+
+    let response;
+    let message;
+
+    if (Array.isArray(requestData)) {
+      response = await cityService.createMultipleCities(requestData);
+      message = "Successfully created multiple cities";
+    } else {
+      response = await cityService.createCity(req.body);
+      message = "Successfully created the city";
+    }
     return res.status(201).json({
       data: response,
       success: true,

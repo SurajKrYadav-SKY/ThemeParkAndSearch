@@ -16,6 +16,16 @@ class CityRepository {
     }
   }
 
+  async createMultipleCities(cities) {
+    try {
+      const createdCities = await City.bulkCreate(cities);
+      return createdCities;
+    } catch (error) {
+      console.log("something went wrong in the repo layer");
+      throw { error };
+    }
+  }
+
   async getCity(cityId) {
     try {
       const city = await City.findByPk(cityId);
