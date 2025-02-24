@@ -1,4 +1,5 @@
 const { ParkTimingRepository } = require("../repository/index");
+const { Park } = require("../models/index");
 
 class ParkTimingService {
   constructor() {
@@ -7,6 +8,15 @@ class ParkTimingService {
 
   async createParkTiming(data) {
     try {
+      // logic to check whether the park with the given ID exist or not
+      const parkExist = await Park.findByPk(data.parkId);
+
+      if (!parkExist) {
+        throw {
+          message: "Park with the given ID does not exist",
+        };
+      }
+
       const parkTime = await this.parkTimingRepository.createParkTiming(data);
       return parkTime;
     } catch (error) {
