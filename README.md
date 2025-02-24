@@ -35,3 +35,4 @@
 ### Relationship
 
 - city --1:n-- Parks i.e A city can have multiple parks but one park belongs to a city
+- park --1:n-- park timing i.e a park can have multiple opening and closing timing.

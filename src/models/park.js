@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
       address: DataTypes.STRING,
       parkDesc: DataTypes.STRING,
       cityId: { type: DataTypes.INTEGER, allowNull: false },
+      capacity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 240,
+      },
     },
     {
       sequelize,
